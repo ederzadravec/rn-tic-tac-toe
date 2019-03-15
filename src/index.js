@@ -3,7 +3,7 @@ import { Text, Dimensions } from 'react-native';
 import styled from 'styled-components';
 
 import { Store } from './contexts';
-import { Table } from './components';
+import { Table, Score, Start, Result } from './components';
 
 const { height, width } = Dimensions.get('window');
 
@@ -16,23 +16,20 @@ const Container = styled.View`
   align-items: center;
 `;
 
-const Score = styled.View`
-  margin-top: 20;
-  margin-bottom: 20;
-  height: 150;
-  background: blue;
-  width: ${width - 20};
-`;
-
 export const Game = () => {
   return (
     <Container>
       <Store.Provider>
-        <Score>
-          <Text>opa</Text>
-        </Score>
+        <Score />
+        <Store.Consumer>
+          {({ game, endGame }) => {
+            if (endGame) return <Result />
 
-        <Table />
+            if (game) return <Table />;
+
+            return <Start />;
+          }}
+        </Store.Consumer>
       </Store.Provider>
     </Container>
   );

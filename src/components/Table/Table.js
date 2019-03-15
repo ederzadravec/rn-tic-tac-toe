@@ -21,7 +21,7 @@ export const Table = () => {
       {({ cubeSize, game }) => {
         return (
           <Content cubeSize={cubeSize}>
-            {game.table.map((row, kRow) => 
+            {game.table.map((row, kRow) =>
               row.map((square, kSquare) => (
                 <Square key={kRow + kSquare} data={square} pos={[kRow, kSquare]}/>
               ))
