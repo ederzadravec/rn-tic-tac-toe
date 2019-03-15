@@ -16,15 +16,13 @@ const Content = styled.View`
   justify-content: center;
   align-items: center;
   width: 100%;
-  border-color: black;
-  border-width: 1;
   border-radius: 5;
-  background-color: #efefef;
+  background-color: #eceff1;
 `
 
 const Item = styled.Text`
   font-size: 55;
-  color: #555;
+  color: ${({ value }) => value === 'x' ? '#0095a8': '#4d2c91'};
 `;
 
 export const Square = ({ data, onPress, pos }) => {
@@ -37,7 +35,7 @@ export const Square = ({ data, onPress, pos }) => {
           <TouchableOpacity onPress={() => !value && setSquare(pos)}>
             <Container cubeSize={cubeSize}>
               <Content>
-                <Item>{value}</Item>
+                <Item value={value}>{value}</Item>
               </Content>
             </Container>
           </TouchableOpacity>
