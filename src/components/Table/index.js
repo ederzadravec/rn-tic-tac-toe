@@ -10,7 +10,9 @@ const Content = styled.View`
   height: ${({ cubeSize }) => cubeSize};
   flex-wrap: wrap;
   flex-direction: row;
-  background-color: red;
+  display: flex;
+  justify-content: space-between;
+  align-content: space-between;
 `;
 
 export const Table = () => {
@@ -19,9 +21,11 @@ export const Table = () => {
       {({ cubeSize, game }) => {
         return (
           <Content cubeSize={cubeSize}>
-            {game.table.map((square, key) => (
-              <Square key={key + square} data={square} />
-            ))}
+            {game.table.map((row, kRow) => 
+              row.map((square, kSquare) => (
+                <Square key={kRow + kSquare} data={square} pos={[kRow, kSquare]}/>
+              ))
+            )}
           </Content>
         );
       }}

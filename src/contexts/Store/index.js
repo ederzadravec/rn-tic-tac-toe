@@ -1,4 +1,5 @@
 import React from 'react';
+import R from 'ramda';
 import { Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
@@ -11,14 +12,20 @@ class Provider extends React.Component {
     users: {
       x: {
         name: 'Zadravec',
+        key: 'x',
       },
       o: {
         name: 'Eder',
+        key: 'o',
       },
     },
-    currentUser: 0,
+    currentUser: 'x',
     game: {
-      table: ['', '', '', '', '', '', '', '', ''],
+      table: [
+        ['', '', ''], 
+        ['', '', ''], 
+        ['', '', '']
+      ],
     },
   };
 
@@ -27,15 +34,25 @@ class Provider extends React.Component {
       users,
       currentUser: 0,
       game: {
-        table: [['', '', ''], ['', '', ''], ['', '', '']],
+        table: R.assocPath(),
       },
     });
   };
 
+  setSquare = ([row, square]) => {
+    this.setState(prevState => ({
+      currentUser: prevState.currentUser === 'x' ? 'o' : 'x',
+      game: { 
+        table: R.assocPath([row, square], prevState.currentUser, prevState.game.table), 
+      } 
+    }))
+  }
+
   render() {
     const value = {
       ...this.state,
-      setStore: this.set,
+      start: this.start,
+      setSquare: this.setSquare,
     };
 
     return <StoreContext.Provider value={value}>{this.props.children}</StoreContext.Provider>;
