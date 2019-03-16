@@ -34,7 +34,7 @@ const Restart = styled.Text`
 export const Result = () => {
   return (
     <Store.Consumer>
-      {({ start, cubeSize }) => {
+      {({ start, clear, cubeSize }) => {
         return (
           <Container cubeSize={cubeSize} onPress={start}>
             <Winner>Vamos lá!</Winner>
@@ -43,7 +43,7 @@ export const Result = () => {
               <Restart>Jogar Novamente</Restart>
             </TouchableHighlight>
 
-            <TouchableHighlight onPress={start}>
+            <TouchableHighlight onPress={clear}>
               <Restart>Zerar Score</Restart>
             </TouchableHighlight>
           </Container>

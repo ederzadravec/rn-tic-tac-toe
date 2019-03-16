@@ -8,17 +8,19 @@ const Container = styled.View`
   margin-top: 20;
   margin-bottom: 20;
   height: 150;
-  background: blue;
   width: 100%;
 `;
 
 export const Score = () => {
   return (
     <Store.Consumer>
-      {({ cubeSize, game, start }) => {
+      {({ cubeSize, game, start, users }) => {
         return (
           <Container>
             <Text>opa</Text>
+            {Object.keys(users).map(user => (
+              <Text>{`${users[user].name}: ${users[user].score}`}</Text>
+            ))}
           </Container>
         );
       }}
